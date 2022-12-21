@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import PokemonList from './PokemonList';
+import PokemonCard from './PokemonCard';
 
 class App extends React.Component {
   constructor(){
@@ -19,7 +19,7 @@ componentDidMount(){
 showList(){
   if(this.state.pokemons?.results){
     const list=this.state.pokemons.results.map((element, i) => {
-       return <PokemonList pokemon={element} key={i} />
+       return <PokemonCard pokemon={element} key={i} />
       }
     )
   return list;

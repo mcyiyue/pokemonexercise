@@ -8,7 +8,7 @@ class PokePic extends React.Component {
     }
 }
 
-class PokemonList extends React.Component {
+class PokemonCard extends React.Component {
     constructor(){
         super();
         this.state = {
@@ -29,15 +29,22 @@ class PokemonList extends React.Component {
     }
 
     render(){
+        const dividerStyle={
+            width:"300px"
+        }
         return(
             <>
-              <div>
-               <p onClick={this.togglePicture}>{this.props.pokemon.name}</p>
-               {this.showImage()}
+              <div className="card"  style={dividerStyle}>
+                <div className="card-divider">
+                    <p onClick={this.togglePicture}>{this.props.pokemon.name}</p>
+                </div>
+               <div className="card-section">
+                    {this.showImage()}
+               </div>
               </div>
             </>
         )
     }
 }
 
-export default PokemonList
+export default PokemonCard
