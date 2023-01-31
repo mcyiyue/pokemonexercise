@@ -3,7 +3,9 @@ import React from 'react';
 class PokePic extends React.Component {
     render(){
         return(
-            <p>{this.props.image}</p>
+        <>
+            <img alt='' src={this.props.image}></img>
+        </>
         )
     }
 }
@@ -12,36 +14,42 @@ class PokemonCard extends React.Component {
     constructor(){
         super();
         this.state = {
-            isTogglePicture: false
+            isTogglePicture: false,
+            pokemon:''
         };
         
         this.togglePicture=this.togglePicture.bind(this);
     }
 
     togglePicture(){
-        this.setState(
-            {isTogglePicture:!this.state.isTogglePicture}
-        )
+            this.setState(
+                {isTogglePicture:!this.state.isTogglePicture}
+            )
+            fetch(this.props.pokemon.url)
+            .then(response => response.json())
+            .then(result => this.setState({pokemon: result.sprites.other['official-artwork'].front_default}));
     }
 
+
     showImage(){
-        return this.state.isTogglePicture ? <PokePic image={this.props.pokemon.url}/> : ''
+        return this.state.isTogglePicture ? <PokePic image={this.state.pokemon}/> : ''
     }
 
     render(){
-        const dividerStyle={
-            width:"300px"
-        }
+
         return(
             <>
-              <div className="card"  style={dividerStyle}>
-                <div className="card-divider">
-                    <p onClick={this.togglePicture}>{this.props.pokemon.name}</p>
+                <div className="card cell small-6 medium-4 large-2">
+                    <div className="card-divider grid-x grid-margin-x align-center">
+                        <p className='small-12 large-12 text-center'>{this.props.pokemon.name}</p>
+                        <p className='small-12 large-12 button' 
+                            onClick={this.togglePicture}>{this.state.isTogglePicture ? 'Hide Pokemon' : 'Show Pokemon'}
+                        </p>
+                    </div>
+                <div className="card-section">
+                        {this.showImage()}
                 </div>
-               <div className="card-section">
-                    {this.showImage()}
-               </div>
-              </div>
+                </div>
             </>
         )
     }

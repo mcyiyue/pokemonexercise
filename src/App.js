@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
+import SearchBar from './SearchBar';
 import PokemonCard from './PokemonCard';
 
 class App extends React.Component {
   constructor(){
     super();
     this.state = {
-      pokemons: []
+      pokemons: [],
+      searchText:''
     }
   }
 
@@ -18,22 +20,39 @@ componentDidMount(){
 
 showList(){
   if(this.state.pokemons?.results){
-    const list=this.state.pokemons.results.map((element, i) => {
+    const list=this.filteredPokemon().map((element, i) => {
        return <PokemonCard pokemon={element} key={i} />
       }
     )
   return list;
   }
 }
-  render(){
+
+filteredPokemon(){
+  return (this.state.pokemons.results.filter(data => {
+    return data.name.toLowerCase().includes(this.state.searchText.toString().toLowerCase())
+  }))
+}
+
+onSearchChange = (event) => {
+  this.setState(
+    {
+      searchText: event.target.value
+    }
+  )
+}
+
+render(){
     
     return(
       <> 
-        <header><h1>POKEMON</h1></header>
-        <div>
+        <header><h1 className='text-center'>POKEMON DATABASE VIEWER</h1></header>
+        <div className='grid-x grid-margin-x align-center'>
+          <SearchBar onSearchBarChange={this.onSearchChange}/>
+        </div>
+        <div className='grid-x grid-margin-x'>
           { this.showList()}
         </div>
-        
       </>
     )
     
