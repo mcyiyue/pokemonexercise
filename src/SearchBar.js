@@ -1,8 +1,13 @@
 import React from 'react';
+import Section from './Section.js';
 
 class SearchBar extends React.Component {
     render(){
-        return <input className='cell large-2' type='search' placeholder='Search Pokemon' onChange={this.props.onSearchBarChange} />
+        return(
+            <Section>
+                <input className='cell large-2' type='search' placeholder='Search Pokemon' onChange={this.props.onSearchBarChange} />
+            </Section>
+        )
     }
 }
 

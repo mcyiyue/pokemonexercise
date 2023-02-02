@@ -36,21 +36,19 @@ class PokemonCard extends React.Component {
     }
 
     render(){
-
         return(
-            <>
-                <div className="card cell small-6 medium-4 large-2">
-                    <div className="card-divider grid-x grid-margin-x align-center">
-                        <p className='small-12 large-12 text-center'>{this.props.pokemon.name}</p>
-                        <p className='small-12 large-12 button' 
-                            onClick={this.togglePicture}>{this.state.isTogglePicture ? 'Hide Pokemon' : 'Show Pokemon'}
-                        </p>
+                
+                    <div className="card cell small-6 medium-4 large-2">
+                        <div className="card-divider grid-x grid-margin-x align-center">
+                            <p className='small-12 large-12 text-center'>{this.props.pokemon.name}</p>
+                            <p className='small-12 large-12 button' 
+                                onClick={this.togglePicture}>{this.state.isTogglePicture ? 'Hide Pokemon' : 'Show Pokemon'}
+                            </p>
+                        </div>
+                    <div className="card-section">
+                            {this.showImage()}
                     </div>
-                <div className="card-section">
-                        {this.showImage()}
-                </div>
-                </div>
-            </>
+                    </div>
         )
     }
 }
